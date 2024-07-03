@@ -12,17 +12,11 @@ def main():
 
         match choice:
             case Unit.STRECKE.value:
-                distance = input("Zurückgelegte Strecke eingeben:\n")
-                if distance is not float:
-                    print("Bitte Zahlen eingeben.")
-                    continue
+                distance = float(input("Zurückgelegte Strecke eingeben:\n"))
                 unit = input("Kilometer oder Meter?\n").strip().lower()
                 amount = calculation.calculate_amount_by_distance(distance, unit)
             case Unit.ZEIT.value:
-                time = input("Gefahrene Dauer eingeben:\n")
-                if time is not float:
-                    print("Bitte Zahlen eingeben.")
-                    continue
+                time = float(input("Gefahrene Dauer eingeben:\n"))
                 unit = input("Stunden oder Minuten?\n").strip().lower()
                 amount = calculation.calculate_amount_by_time(time, unit)
             case _:

@@ -1,5 +1,6 @@
 import config
 from Units import Unit
+import errors
 
 
 def calculate_amount_by_distance(distance, unit):
@@ -9,7 +10,7 @@ def calculate_amount_by_distance(distance, unit):
         case Unit.METERS.value:
             return distance * config.KILOMETER_RATE / 1000
         case _:
-            print("Fehlerhafte Eingabe! Bitte Kilometer oder Meter angeben.")
+            return errors.wrong_unit
 
 
 def calculate_amount_by_time(time, unit):
@@ -19,13 +20,14 @@ def calculate_amount_by_time(time, unit):
         case Unit.MINUTES.value:
             return time * config.MINUTE_RATE
         case _:
-            print("Fehlerhafte Eingabe! Bitte Minuten oder Stunden angeben.")
+            return errors.wrong_unit
 
 
 def apply_discount(amount, code):
+    if not code:
+        return amount
     discount_amount = config.DISCOUNTS.get(code)
     if discount_amount is None:
-        print("Rabattcode Fehlerhaft!")
-        return amount
+        return errors.wrong_discount
     else:
         return amount * (1 - discount_amount)

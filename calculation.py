@@ -23,7 +23,7 @@ def calculate_amount_by_time(time, unit):
             return errors.wrong_unit
 
 
-def apply_discount(amount, code):
+def calculate_discount(amount, code):
     if not code:
         return amount
     discount_amount = config.DISCOUNTS.get(code)

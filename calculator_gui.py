@@ -1,21 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-
-def calculate_amount_by_distance(distance, unit):
-    if unit == "km":
-        return distance * 0.5
-    else:
-        return distance * 0.0005
-
-def calculate_amount_by_time(time, unit):
-    if unit == "hours":
-        return time * 20
-    else:
-        return time * 0.3333
-
-def apply_discount(amount, code):
-    discounts = {"Tec5": 0.05, "Tec15": 0.15, "TecFirstTry": 0.50}
-    return amount * (1 - discounts.get(code, 0))
+import calculation
 
 class CalculatorApp:
     def __init__(self, master):
@@ -73,8 +58,8 @@ class CalculatorApp:
             unit = self.distance_unit.get()
             discount_code = self.distance_discount.get()
 
-            amount = calculate_amount_by_distance(distance, unit)
-            final_amount = apply_discount(amount, discount_code)
+            amount = calculation.calculate_amount_by_distance(distance, unit)
+            final_amount = calculation.apply_discount(amount, discount_code)
 
             messagebox.showinfo("Result", f"Calculated amount: {final_amount:.2f}")
         except ValueError:
@@ -86,8 +71,8 @@ class CalculatorApp:
             unit = self.time_unit.get()
             discount_code = self.time_discount.get()
 
-            amount = calculate_amount_by_time(time, unit)
-            final_amount = apply_discount(amount, discount_code)
+            amount = calculation.calculate_amount_by_time(time, unit)
+            final_amount = calculation.apply_discount(amount, discount_code)
 
             messagebox.showinfo("Result", f"Calculated amount: {final_amount:.2f}")
         except ValueError:

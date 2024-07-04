@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-import calculation
+from calculation import calculate_discount, calculate_amount_by_distance, calculate_amount_by_time
 
 class CalculatorApp:
     def __init__(self, master):
@@ -58,8 +58,8 @@ class CalculatorApp:
             unit = self.distance_unit.get()
             discount_code = self.distance_discount.get()
 
-            amount = calculation.calculate_amount_by_distance(distance, unit)
-            final_amount = calculation.apply_discount(amount, discount_code)
+            amount = calculate_amount_by_distance(distance, unit)
+            final_amount = calculate_discount(amount, discount_code)
 
             messagebox.showinfo("Result", f"Calculated amount: {final_amount:.2f}")
         except ValueError:
@@ -71,8 +71,8 @@ class CalculatorApp:
             unit = self.time_unit.get()
             discount_code = self.time_discount.get()
 
-            amount = calculation.calculate_amount_by_time(time, unit)
-            final_amount = calculation.apply_discount(amount, discount_code)
+            amount = calculate_amount_by_time(time, unit)
+            final_amount = calculate_discount(amount, discount_code)
 
             messagebox.showinfo("Result", f"Calculated amount: {final_amount:.2f}")
         except ValueError:

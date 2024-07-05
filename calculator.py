@@ -12,13 +12,21 @@ def main():
 
         match choice:
             case Unit.STRECKE.value:
-                distance = float(input("Zurückgelegte Strecke eingeben:\n"))
+                distance = input("Zurückgelegte Strecke eingeben:\n")
+                if not str.isnumeric(distance) == False:
+                    print("Falsche Angabe, bitte geben Sie nur Ziffern ein. Programm wird neugestaret.")
+                    continue
                 unit = input("Kilometer oder Meter?\n").strip().lower()
                 amount = calculate_amount_by_distance(distance, unit)
+
             case Unit.ZEIT.value:
-                time = float(input("Gefahrene Dauer eingeben:\n"))
+                time = input("Gefahrene Dauer eingeben:\n")
+                if not str.isnumeric(time) == False:
+                    print("Falsche Angabe, bitte geben Sie nur Ziffern ein. Programm wird neugestaret.")
+                    continue
                 unit = input("Stunden oder Minuten?\n").strip().lower()
                 amount = calculate_amount_by_time(time, unit)
+
             case _:
                 print("Falsche Angabe. Programm wird neugestaret.")
                 continue

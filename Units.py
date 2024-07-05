@@ -3,8 +3,8 @@ from enum import Enum
 
 class Unit(Enum):
     METERS = "meter"
-    KILOMETER = "kilometer"
+    KILOMETERS = "kilometer"
     MINUTES = "minuten"
     HOURS = "stunden"
-    STRECKE = "strecke"
-    ZEIT = "zeit"
+    DISTANCE = "strecke"
+    TIME = "zeit"

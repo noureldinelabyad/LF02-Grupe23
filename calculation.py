@@ -5,7 +5,7 @@ import errors
 
 def calculate_amount_by_distance(distance, unit):
     match unit.lower():
-        case Unit.KILOMETER.value:
+        case Unit.KILOMETERS.value:
             return distance * config.KILOMETER_RATE
         case Unit.METERS.value:
             return distance * config.KILOMETER_RATE / 1000

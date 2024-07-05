@@ -11,14 +11,14 @@ def main():
         choice = input().lower()
 
         match choice:
-            case Unit.STRECKE.value:
+            case Unit.DISTANCE.value:
                 distance = input("Zurückgelegte Strecke eingeben:\n")
                 if not str.isnumeric(distance):
                     print("Fehler! Bitte geben Sie nur Ziffern an.\n")
                     continue
                 unit = input("Kilometer oder Meter?\n").strip().lower()
                 amount = calculate_amount_by_distance(float(distance), unit)
-            case Unit.ZEIT.value:
+            case Unit.TIME.value:
                 time = input("Gefahrene Dauer eingeben:\n")
                 if not str.isnumeric(time):
                     print("Fehler! Bitte geben Sie nur Ziffern an.\n")

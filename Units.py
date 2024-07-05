@@ -8,3 +8,5 @@ class Unit(Enum):
     HOURS = "stunden"
     STRECKE = "strecke"
     ZEIT = "zeit"
+    JA = "ja"
+    NEIN = "nein"

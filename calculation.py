@@ -14,6 +14,7 @@ def calculate_amount_by_distance(distance, unit):
 
 
 def calculate_amount_by_time(time, unit):
+    time = float(time)
     match unit.lower():
         case Unit.HOURS.value:
             return time * config.MINUTE_RATE * 60

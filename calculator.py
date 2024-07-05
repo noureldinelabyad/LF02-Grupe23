@@ -12,19 +12,25 @@ def main():
 
         match choice:
             case Unit.STRECKE.value:
-                distance = float(input("Zurückgelegte Strecke eingeben:\n"))
+                distance = input("Zurückgelegte Strecke eingeben:\n")
+                if not str.isnumeric(distance):
+                    print("Fehler! Bitte geben Sie nur Ziffern an.\n")
+                    continue
                 unit = input("Kilometer oder Meter?\n").strip().lower()
-                amount = calculate_amount_by_distance(distance, unit)
+                amount = calculate_amount_by_distance(float(distance), unit)
             case Unit.ZEIT.value:
-                time = float(input("Gefahrene Dauer eingeben:\n"))
+                time = input("Gefahrene Dauer eingeben:\n")
+                if not str.isnumeric(time):
+                    print("Fehler! Bitte geben Sie nur Ziffern an.\n")
+                    continue
                 unit = input("Stunden oder Minuten?\n").strip().lower()
-                amount = calculate_amount_by_time(time, unit)
+                amount = calculate_amount_by_time(float(time), unit)
             case _:
-                print("Falsche Angabe. Programm wird neugestaret.")
+                print("Fehlerhafte Eingabe. Programm wird neugestaret.")
                 continue
 
         if amount == errors.wrong_unit:
-            print("Fehlerhafte Eingabe. Bitte überprüfen.")
+            print("Fehlerhafte Eingabe. Programm wird neugestaret.")
             continue
 
         discount_code = input("Rabattcode eingeben (optional):\n").strip()
@@ -37,7 +43,7 @@ def main():
         print(f"Berechneter Betrag: {amount:.2f}€")
 
         again = input("Möchtest du eine neue Strecke berechnen lassen? (Ja/Nein): ").strip().lower()
-        if again == "nein":
+        if again != "ja":
             sys.exit()
 
 

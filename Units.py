@@ -6,5 +6,5 @@ class Unit(Enum):
     KILOMETER = "kilometer"
     MINUTES = "minuten"
     HOURS = "stunden"
-    STRECKE = "strecke"
-    ZEIT = "zeit"
+    DISTANCE = "strecke"
+    TIME = "zeit"

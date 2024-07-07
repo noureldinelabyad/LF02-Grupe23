@@ -2,48 +2,49 @@ import sys
 
 from calculation import calculate_discount, calculate_amount_by_distance, calculate_amount_by_time
 from Units import Unit
+from messages import Message
 import errors
 
 
 def main():
     while True:
-        print("Möchtest du deine Fahrt per zurückgelegter Strecke oder Zeit berechnen?")
+        print(Message.STARTING_CHOICE.value)
         choice = input().lower()
 
         match choice:
             case Unit.DISTANCE.value:
-                distance = input("Zurückgelegte Strecke eingeben:\n")
+                distance = input(Message.DISTANCE.value)
                 if not str.isnumeric(distance):
-                    print("Fehler! Bitte geben Sie nur Ziffern an.\n")
+                    print(Message.ERROR_NUMERIC.value)
                     continue
-                unit = input("Kilometer oder Meter?\n").strip().lower()
+                unit = input(Message.DISTANCE_CHOICE.value).strip().lower()
                 amount = calculate_amount_by_distance(float(distance), unit)
             case Unit.TIME.value:
-                time = input("Gefahrene Dauer eingeben:\n")
+                time = input(Message.TIME.value)
                 if not str.isnumeric(time):
-                    print("Fehler! Bitte geben Sie nur Ziffern an.\n")
+                    print(Message.ERROR_NUMERIC.value)
                     continue
-                unit = input("Stunden oder Minuten?\n").strip().lower()
+                unit = input(Message.TIME_CHOICE.value).strip().lower()
                 amount = calculate_amount_by_time(float(time), unit)
             case _:
-                print("Fehlerhafte Eingabe. Programm wird neugestaret.")
+                print(Message.ERROR_TYPING.value)
                 continue
 
         if amount == errors.wrong_unit:
-            print("Fehlerhafte Eingabe. Programm wird neugestaret.")
+            print(Message.ERROR_TYPING.value)
             continue
 
-        discount_code = input("Rabattcode eingeben (optional):\n").strip()
+        discount_code = input(Message.CODE_CHOICE.value).strip()
         amount = calculate_discount(amount, discount_code)
 
         if amount == errors.wrong_discount:
-            print("Fehlerhafte Eingabe. Bitte überprüfen.")
+            print(Message.ERROR_TYPING.value)
             continue
 
-        print(f"Berechneter Betrag: {amount:.2f}€")
+        print(Message.TOTAL.value.format(amount))
 
-        again = input("Möchtest du eine neue Strecke berechnen lassen? (Ja/Nein): ").strip().lower()
-        if again != "ja":
+        again = input(Message.ENDING_CHOICE.value).strip().lower()
+        if again != Unit.YES.value:
             sys.exit()
 
 

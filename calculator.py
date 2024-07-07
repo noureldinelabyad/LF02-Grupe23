@@ -13,26 +13,32 @@ def main():
 
         match choice:
             case Unit.DISTANCE.value:
-                distance = input(Message.DISTANCE.value)
-                if not str.isnumeric(distance):
-                    print(Message.ERROR_NUMERIC.value)
-                    continue
-                unit = input(Message.DISTANCE_CHOICE.value).strip().lower()
-                amount = calculate_amount_by_distance(float(distance), unit)
+                distance = get_value(
+                    message=Message.DISTANCE.value,
+                    error_message=Message.ERROR_NUMERIC.value,
+                    validate=lambda user_input: not str.isnumeric(user_input)
+                )
+                unit = get_value(
+                    message=Message.DISTANCE_CHOICE.value,
+                    error_message=Message.ERROR_TYPING.value,
+                    validate=lambda user_input: user_input not in [Unit.KILOMETERS.value, Unit.METERS.value]
+                )
+                amount = calculate_amount_by_distance(float(distance), unit.strip().lower())
             case Unit.TIME.value:
-                time = input(Message.TIME.value)
-                if not str.isnumeric(time):
-                    print(Message.ERROR_NUMERIC.value)
-                    continue
-                unit = input(Message.TIME_CHOICE.value).strip().lower()
+                time = get_value(
+                    message=Message.TIME.value,
+                    error_message=Message.ERROR_NUMERIC.value,
+                    validate=lambda user_input: not str.isnumeric(user_input)
+                )
+                unit = get_value(
+                    message=Message.TIME_CHOICE.value,
+                    error_message=Message.ERROR_TYPING.value,
+                    validate=lambda user_input: user_input not in [Unit.HOURS.value, Unit.MINUTES.value]
+                )
                 amount = calculate_amount_by_time(float(time), unit)
             case _:
                 print(Message.ERROR_TYPING.value)
                 continue
-
-        if amount == errors.wrong_unit:
-            print(Message.ERROR_TYPING.value)
-            continue
 
         discount_code = input(Message.CODE_CHOICE.value).strip()
         amount = calculate_discount(amount, discount_code)
@@ -46,6 +52,15 @@ def main():
         again = input(Message.ENDING_CHOICE.value).strip().lower()
         if again != Unit.YES.value:
             sys.exit()
+
+
+def get_value(message, error_message, validate):
+    while True:
+        user_input = input(message)
+        if validate(user_input):
+            print(error_message)
+            continue
+        return user_input
 
 
 if __name__ == "__main__":

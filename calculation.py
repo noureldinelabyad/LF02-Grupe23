@@ -1,6 +1,6 @@
 import config
 from Units import Unit
-import errors
+from errors import UnitException, DiscountException
 
 
 def calculate_amount_by_distance(distance, unit):
@@ -10,7 +10,7 @@ def calculate_amount_by_distance(distance, unit):
         case Unit.METERS.value:
             return distance * config.KILOMETER_RATE / 1000
         case _:
-            return errors.wrong_unit
+            raise UnitException
 
 
 def calculate_amount_by_time(time, unit):
@@ -20,7 +20,7 @@ def calculate_amount_by_time(time, unit):
         case Unit.MINUTES.value:
             return time * config.MINUTE_RATE
         case _:
-            return errors.wrong_unit
+            raise UnitException
 
 
 def calculate_discount(amount, code):
@@ -28,7 +28,7 @@ def calculate_discount(amount, code):
         return amount
     discount_amount = config.DISCOUNTS.get(code)
     if discount_amount is None:
-        return errors.wrong_discount
+        raise DiscountException
     else:
         # Calculates the Amount  * ( 100% - DiscountAmount%) = Total Amount
         return amount * (1 - discount_amount)

@@ -13,3 +13,4 @@ class Message(Enum):
     ERROR_NUMERIC = "Fehler! Bitte geben Sie nur Ziffern an.\n"
     ERROR_TYPING = "Fehlerhafte Eingabe. Bitte überprüfen."
     ERROR_CODE = "Fehlerhafte Eingabe. Bitte den Code überprüfen."
+

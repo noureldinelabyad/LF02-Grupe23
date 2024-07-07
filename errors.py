@@ -1,2 +1,6 @@
-wrong_unit = "WRONG_UNIT"
-wrong_discount = "WRONG_DISCOUNT_CODE"
+class UnitException(Exception):
+    pass
+
+
+class DiscountException(Exception):
+    pass

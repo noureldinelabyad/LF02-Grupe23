@@ -11,7 +11,7 @@ def main():
         choice = get_value(
             message=Message.STARTING_CHOICE.value,
             error_message=Message.ERROR_TYPING.value,
-            validate=lambda user_input: user_input not in [Unit.DISTANCE.value, Unit.TIME.value]
+            validate=lambda user_input: user_input in [Unit.DISTANCE.value, Unit.TIME.value]
         )
 
         match choice:
@@ -19,24 +19,24 @@ def main():
                 distance = get_value(
                     message=Message.DISTANCE.value,
                     error_message=Message.ERROR_NUMERIC.value,
-                    validate=lambda user_input: not str.isnumeric(user_input)
+                    validate=lambda user_input: str.isnumeric(user_input)
                 )
                 unit = get_value(
                     message=Message.DISTANCE_CHOICE.value,
                     error_message=Message.ERROR_TYPING.value,
-                    validate=lambda user_input: user_input not in [Unit.KILOMETERS.value, Unit.METERS.value]
+                    validate=lambda user_input: user_input in [Unit.KILOMETERS.value, Unit.METERS.value]
                 )
-                amount = calculate_amount_by_distance(float(distance), unit.strip().lower())
+                amount = calculate_amount_by_distance(float(distance), unit)
             case Unit.TIME.value:
                 time = get_value(
                     message=Message.TIME.value,
                     error_message=Message.ERROR_NUMERIC.value,
-                    validate=lambda user_input: not str.isnumeric(user_input)
+                    validate=lambda user_input: str.isnumeric(user_input)
                 )
                 unit = get_value(
                     message=Message.TIME_CHOICE.value,
                     error_message=Message.ERROR_TYPING.value,
-                    validate=lambda user_input: user_input not in [Unit.HOURS.value, Unit.MINUTES.value]
+                    validate=lambda user_input: user_input in [Unit.HOURS.value, Unit.MINUTES.value]
                 )
                 amount = calculate_amount_by_time(float(time), unit)
 
@@ -58,9 +58,10 @@ def get_value(message, error_message, validate):
     while True:
         user_input = input(message).lower()
         if validate(user_input):
+            return user_input
+        else:
             print(error_message)
             continue
-        return user_input
 
 
 if __name__ == "__main__":

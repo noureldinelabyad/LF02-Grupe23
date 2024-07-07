@@ -4,7 +4,7 @@ import errors
 
 
 def calculate_amount_by_distance(distance, unit):
-    match unit.lower():
+    match unit.strip().lower():
         case Unit.KILOMETERS.value:
             return distance * config.KILOMETER_RATE
         case Unit.METERS.value:
@@ -14,7 +14,7 @@ def calculate_amount_by_distance(distance, unit):
 
 
 def calculate_amount_by_time(time, unit):
-    match unit.lower():
+    match unit.strip().lower():
         case Unit.HOURS.value:
             return time * config.MINUTE_RATE * 60
         case Unit.MINUTES.value:

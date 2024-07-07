@@ -8,8 +8,11 @@ import errors
 
 def main():
     while True:
-        print(Message.STARTING_CHOICE.value)
-        choice = input().lower()
+        choice = get_value(
+            message=Message.STARTING_CHOICE.value,
+            error_message=Message.ERROR_TYPING.value,
+            validate=lambda user_input: user_input not in [Unit.DISTANCE.value, Unit.TIME.value]
+        )
 
         match choice:
             case Unit.DISTANCE.value:
@@ -36,9 +39,6 @@ def main():
                     validate=lambda user_input: user_input not in [Unit.HOURS.value, Unit.MINUTES.value]
                 )
                 amount = calculate_amount_by_time(float(time), unit)
-            case _:
-                print(Message.ERROR_TYPING.value)
-                continue
 
         discount_code = input(Message.CODE_CHOICE.value).strip()
         amount = calculate_discount(amount, discount_code)
@@ -56,7 +56,7 @@ def main():
 
 def get_value(message, error_message, validate):
     while True:
-        user_input = input(message)
+        user_input = input(message).lower()
         if validate(user_input):
             print(error_message)
             continue

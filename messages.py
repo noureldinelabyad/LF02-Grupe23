@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class Message(Enum):
-    STARTING_CHOICE = "Möchtest du deine Fahrt per zurückgelegter Strecke oder Zeit berechnen?"
+    STARTING_CHOICE = "Möchtest du deine Fahrt per zurückgelegter Strecke oder Zeit berechnen?\n"
     DISTANCE = "Zurückgelegte Strecke eingeben:\n"
     DISTANCE_CHOICE = "Kilometer oder Meter?\n"
     TIME = "Gefahrene Dauer eingeben:\n"

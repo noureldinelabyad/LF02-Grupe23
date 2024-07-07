@@ -1,6 +1,6 @@
 import config
-from Units import Unit
-from errors import UnitException, DiscountException
+from units import Unit
+from exceptions import UnitException, DiscountException
 
 
 def calculate_amount_by_distance(distance, unit):

@@ -1,8 +1,8 @@
 import sys
 
 import config
-from calculation import calculate_discount, calculate_amount_by_distance, calculate_amount_by_time
-from Units import Unit
+from calculations import calculate_discount, calculate_amount_by_distance, calculate_amount_by_time
+from units import Unit
 from messages import Message
 
 

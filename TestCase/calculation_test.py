@@ -1,7 +1,7 @@
 import unittest
 
-from calculation import calculate_discount, calculate_amount_by_time, calculate_amount_by_distance
-from errors import DiscountException, UnitException
+from calculations import calculate_discount, calculate_amount_by_time, calculate_amount_by_distance
+from exceptions import DiscountException, UnitException
 
 
 class TestCalculation(unittest.TestCase):

@@ -29,5 +29,6 @@ def calculate_discount(amount, code):
     discount_amount = config.DISCOUNTS.get(code)
     if discount_amount is None:
         return errors.wrong_discount
-    else: # Calculates the Amount  * ( 100% - DiscountAmount%) = Total Amount
+    else:
+        # Calculates the Amount  * ( 100% - DiscountAmount%) = Total Amount
         return amount * (1 - discount_amount)

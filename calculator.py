@@ -1,9 +1,9 @@
 import sys
 
+import config
 from calculation import calculate_discount, calculate_amount_by_distance, calculate_amount_by_time
 from Units import Unit
 from messages import Message
-import errors
 
 
 def main():
@@ -11,8 +11,8 @@ def main():
         choice = get_value(
             message=Message.STARTING_CHOICE.value,
             error_message=Message.ERROR_TYPING.value,
-            validate=lambda user_input: user_input in [Unit.DISTANCE.value, Unit.TIME.value]
-        )
+            validate=lambda user_input: user_input.lower() in [Unit.DISTANCE.value, Unit.TIME.value]
+        ).lower()
 
         match choice:
             case Unit.DISTANCE.value:
@@ -24,7 +24,7 @@ def main():
                 unit = get_value(
                     message=Message.DISTANCE_CHOICE.value,
                     error_message=Message.ERROR_TYPING.value,
-                    validate=lambda user_input: user_input in [Unit.KILOMETERS.value, Unit.METERS.value]
+                    validate=lambda user_input: user_input.lower() in [Unit.KILOMETERS.value, Unit.METERS.value]
                 )
                 amount = calculate_amount_by_distance(float(distance), unit)
             case Unit.TIME.value:
@@ -36,16 +36,16 @@ def main():
                 unit = get_value(
                     message=Message.TIME_CHOICE.value,
                     error_message=Message.ERROR_TYPING.value,
-                    validate=lambda user_input: user_input in [Unit.HOURS.value, Unit.MINUTES.value]
+                    validate=lambda user_input: user_input.lower() in [Unit.HOURS.value, Unit.MINUTES.value]
                 )
                 amount = calculate_amount_by_time(float(time), unit)
 
-        discount_code = input(Message.CODE_CHOICE.value).strip()
+        discount_code = get_value(
+            message=Message.CODE_CHOICE.value,
+            error_message=Message.ERROR_CODE.value,
+            validate=lambda user_input: not user_input or user_input in config.DISCOUNTS.keys()
+        )
         amount = calculate_discount(amount, discount_code)
-
-        if amount == errors.wrong_discount:
-            print(Message.ERROR_TYPING.value)
-            continue
 
         print(Message.TOTAL.value.format(amount))
 
@@ -56,7 +56,7 @@ def main():
 
 def get_value(message, error_message, validate):
     while True:
-        user_input = input(message).lower()
+        user_input = input(message)
         if validate(user_input):
             return user_input
         else:

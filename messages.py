@@ -12,3 +12,4 @@ class Message(Enum):
     ENDING_CHOICE = "Möchtest du eine neue Strecke berechnen lassen? (Ja/Nein): "
     ERROR_NUMERIC = "Fehler! Bitte geben Sie nur Ziffern an.\n"
     ERROR_TYPING = "Fehlerhafte Eingabe. Bitte überprüfen."
+    ERROR_CODE = "Fehlerhafte Eingabe. Bitte den Code überprüfen."

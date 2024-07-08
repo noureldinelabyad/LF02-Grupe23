@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-from calculation import calculate_discount, calculate_amount_by_distance, calculate_amount_by_time
+from calculations import calculate_discount, calculate_amount_by_distance, calculate_amount_by_time
 
 class CalculatorApp:
     def __init__(self, master):

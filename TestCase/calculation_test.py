@@ -1,7 +1,7 @@
 import unittest
 
-from calculation import calculate_discount, calculate_amount_by_time, calculate_amount_by_distance
-import errors
+from calculations import calculate_discount, calculate_amount_by_time, calculate_amount_by_distance
+from exceptions import DiscountException, UnitException
 
 
 class TestCalculation(unittest.TestCase):
@@ -18,7 +18,8 @@ class TestCalculation(unittest.TestCase):
         self.assertEqual(calculate_discount(10, None), 10)
 
     def test_discount_error(self):
-        self.assertEqual(calculate_discount(10, "Test"), errors.wrong_discount)
+        with self.assertRaises(DiscountException):
+            calculate_discount(10, "Ligeia")
 
     def test_meter_rate(self):
         self.assertEqual(calculate_amount_by_distance(500, "meter"), 0.33)
@@ -26,8 +27,9 @@ class TestCalculation(unittest.TestCase):
     def test_kilometer_rate(self):
         self.assertEqual(calculate_amount_by_distance(1, "kilometer"), 0.66)
 
-    def test_disctance_rate_error(self):
-        self.assertEqual(calculate_amount_by_distance(1, "kilometter"), errors.wrong_unit)
+    def test_distance_rate_error(self):
+        with self.assertRaises(UnitException):
+            calculate_amount_by_distance(1, "haku")
 
     def test_minute_rate(self):
         self.assertEqual(calculate_amount_by_time(30, "minuten"), 6.60)
@@ -36,4 +38,5 @@ class TestCalculation(unittest.TestCase):
         self.assertEqual(calculate_amount_by_time(1, "stunden"), 13.20)
 
     def test_time_rate_error(self):
-        self.assertEqual(calculate_amount_by_time(1, "mineuten"), errors.wrong_unit)
+        with self.assertRaises(UnitException):
+            calculate_amount_by_time(1, "fleur5")

@@ -8,3 +8,6 @@ class Unit(Enum):
     HOURS = "stunden"
     DISTANCE = "strecke"
     TIME = "zeit"
+    YES = "ja"
+    NO = "nein"
+
